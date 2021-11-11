@@ -18,7 +18,7 @@ public struct Texte {
 
     public init() {}
 
-    public func makeTitlesWithPaths(_ stringArray: [String], withPrefix prefix: String) -> [TitleWithPath] {
+    public func makeTitlesWithPaths(_ stringArray: [String], withPrefix prefix: String = "https://") -> [TitleWithPath] {
         return stringArray.map {
             TitleWithPath(title: $0, path: $0.pathPrefix(prefix))
         }
@@ -26,7 +26,7 @@ public struct Texte {
 
     public func attributedTextWithURLsMatching(_ pattern: String,
                                                from text: String,
-                                               urlPrefix: String,
+                                               urlPrefix: String = "https://",
                                                attributes: [NSMutableAttributedString.Key: Any]? = nil,
                                                linkAttributes: [NSMutableAttributedString.Key: Any]? = nil) -> NSMutableAttributedString {
 
