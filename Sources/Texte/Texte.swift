@@ -23,8 +23,12 @@ public struct Texte {
         }
     }
 
-    public func attributedTextWithURLsMatching(_ pattern: String, from text: String, urlPrefix: String) -> NSMutableAttributedString {
-        let attrString = NSMutableAttributedString(string: text)
+    public func attributedTextWithURLsMatching(_ pattern: String,
+                                               from text: String,
+                                               urlPrefix: String,
+                                               attributes: [NSMutableAttributedString.Key: Any]? = nil) -> NSMutableAttributedString {
+
+        let attrString = NSMutableAttributedString(string: text, attributes: attributes)
         let linkTexts = text.findWith(pattern)
         let titlesWithPaths = makeTitlesWithPaths(linkTexts, withPrefix: urlPrefix)
 
@@ -32,11 +36,12 @@ public struct Texte {
             guard let url = titleWithPath.url else { continue }
             let range = attrString.mutableString.range(of: titleWithPath.title)
             if range.location != NSNotFound {
-                let attributes = [NSMutableAttributedString.Key.link: url]
-                attrString.addAttributes(attributes, range: range)
+                let attr = [NSMutableAttributedString.Key.link: url]
+                attrString.addAttributes(attr, range: range)
             }
         }
         return attrString
     }
+
 }
 
