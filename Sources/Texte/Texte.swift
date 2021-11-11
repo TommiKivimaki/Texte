@@ -23,18 +23,14 @@ public struct Texte {
         }
     }
 
-    public func attributedTextWithURLsMatching(_ patterns: [String],
+    public func attributedTextWithURLsMatching(_ pattern: String,
                                                from text: String,
                                                urlPrefix: String,
                                                attributes: [NSMutableAttributedString.Key: Any]? = nil) -> NSMutableAttributedString {
 
         let attrString = NSMutableAttributedString(string: text, attributes: attributes)
 
-        var linkTexts = [String]()
-        patterns.forEach { pattern in
-            let stringArray = text.findWith(pattern)
-            linkTexts.append(contentsOf: stringArray)
-        }
+        let linkTexts = text.findWith(pattern)
 
         let titlesWithPaths = makeTitlesWithPaths(linkTexts, withPrefix: urlPrefix)
 
