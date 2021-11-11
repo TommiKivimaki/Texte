@@ -60,7 +60,7 @@ final class TexteTests: XCTestCase {
         let pattern = "example.fi/[a-z]*"
         let prefix = "https://"
         let string = "Link example.fi/page. End."
-        let result = texte.attributedTextWithURLsMatching(pattern,
+        let result = texte.attributedTextWithURLsMatching([pattern],
                                                            from: string,
                                                            urlPrefix: prefix)
 
