@@ -14,7 +14,7 @@ extension String {
 
     public func findWith(_ pattern: String) -> [String] {
         let regex = try! NSRegularExpression(pattern: pattern)
-        let range = NSRange(location: 0, length: self.utf8.count)
+        let range = NSRange(location: 0, length: self.utf16.count)
         let found = regex.matches(in: self, options: [], range: range)
 
         let nsRanges = found.map { $0.range }
