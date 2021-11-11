@@ -7,6 +7,7 @@ import AppKit
 #endif
 
 public struct Texte {
+    
     public struct TitleWithPath: Equatable {
         let title: String
         let path: String
@@ -26,7 +27,8 @@ public struct Texte {
     public func attributedTextWithURLsMatching(_ pattern: String,
                                                from text: String,
                                                urlPrefix: String,
-                                               attributes: [NSMutableAttributedString.Key: Any]? = nil) -> NSMutableAttributedString {
+                                               attributes: [NSMutableAttributedString.Key: Any]? = nil,
+                                               linkAttributes: [NSMutableAttributedString.Key: Any]? = nil) -> NSMutableAttributedString {
 
         let attrString = NSMutableAttributedString(string: text, attributes: attributes)
 
@@ -38,7 +40,15 @@ public struct Texte {
             guard let url = titleWithPath.url else { continue }
             let range = attrString.mutableString.range(of: titleWithPath.title)
             if range.location != NSNotFound {
-                let attr = [NSMutableAttributedString.Key.link: url]
+                var attr: [NSMutableAttributedString.Key: Any] = [
+                    .link: url]
+
+                if let linkAttributes = linkAttributes {
+                    for (key, value) in linkAttributes {
+                        attr[key] = value
+                    }
+                }
+
                 attrString.addAttributes(attr, range: range)
             }
         }
