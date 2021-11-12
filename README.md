@@ -1,3 +1,3 @@
 # Texte
 
-A description of this package.
+Methods and extensions for parsing and manipulating strings.
