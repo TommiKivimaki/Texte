@@ -6,9 +6,13 @@ import UIKit
 import AppKit
 #endif
 
+/// A library with helper functions to work with strings.
 public struct Texte {
 
-    /// A model for a link
+    /// TitleWithPath is a model for a link.
+    ///
+    /// It is constructed from two stored properties. A `title` and a `path` to a location of a resource.
+    /// It also provides a URL to the location of a resouce.
     public struct TitleWithPath: Equatable {
         let title: String
         let path: String
@@ -17,9 +21,11 @@ public struct Texte {
         }
     }
 
+    /// Initializer to make an instance of Texte. Texte does not need any configuration. 
     public init() {}
 
     /// Makes an array of link models from a string array. Makes sure that all the paths have prefix.
+    ///
     /// - Parameters:
     ///   - stringArray: Array of strings that are converted to link models
     ///   - prefix: Prefix for link paths
@@ -31,6 +37,7 @@ public struct Texte {
     }
 
     /// Converts a string to an `NSMutableAttributedString`. Creates clickable links from a URL like texts, e.g. example.fi/page.
+    ///
     /// - Parameters:
     ///   - pattern: RegEx pattern that is used to search URL like ranges from the string
     ///   - text: A text that is converted
