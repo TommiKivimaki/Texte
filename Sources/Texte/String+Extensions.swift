@@ -31,4 +31,22 @@ extension String {
 
         return result
     }
+
+    /// Formats string to a fixed length
+    ///
+    /// - Parameters:
+    ///   - text: A string to format to a fixed length
+    ///   - toWidth: Length of the string
+    public func formatToWidth(_ width: Int) -> String {
+        guard width > 0 else { return "" }
+
+        if self.count < width {
+            let whitespace = String(repeating: " ", count: width - self.count)
+            return self.appending(whitespace)
+        } else if self.count > width {
+            return String(self.prefix(width))
+        } else {
+            return self
+        }
+    }
 }
