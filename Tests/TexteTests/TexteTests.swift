@@ -1,6 +1,7 @@
 import XCTest
 @testable import Texte
 
+/// Tests for Texte methods and String extensions
 final class TexteTests: XCTestCase {
 
     var texte: Texte!
@@ -65,5 +66,26 @@ final class TexteTests: XCTestCase {
                                                            urlPrefix: prefix)
 
         XCTAssertEqual(result, reference)
+    }
+
+    func testFormatToWidth() {
+        let input = "1234567890"
+
+        var formatted = input.formatToWidth(10)
+        XCTAssertEqual(formatted, input)
+
+        formatted = input.formatToWidth(6)
+        XCTAssertEqual(formatted, "123456")
+
+        formatted = input.formatToWidth(1)
+        XCTAssertEqual(formatted, "1")
+
+        formatted = input.formatToWidth(20)
+        XCTAssertEqual(formatted, input.appending(String(repeating: " ",
+                                                         count: 10)))
+
+        // Should return an empty string for negative values.
+        formatted = input.formatToWidth(-4)
+        XCTAssertEqual(formatted, "")
     }
 }
